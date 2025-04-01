@@ -1,4 +1,4 @@
-package com.emiliofds.prices;
+package com.emiliofds.prices.app.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,10 @@
-package com.emiliofds.prices;
+package com.emiliofds.prices.app;
 
+import com.emiliofds.prices.app.rest.PricesServiceApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = PricesServiceApplication.class)
 class PricesServiceApplicationTests {
 
 	@Test

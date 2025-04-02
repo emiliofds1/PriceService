@@ -1,6 +1,5 @@
-package com.emiliofds.prices.app;
+package com.emiliofds.prices;
 
-import com.emiliofds.prices.app.rest.PricesServiceApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title:  Prices API Specification
+  description: An API that allows to search product prices.
+  version: 1.0.0
+tags:
+  - name: prices
+paths:
+  /price:
+    get:
+      tags:
+        - prices
+      summary: Get the prices of a product
+      description: Get the price for a product based on the product id, the brand id and the query date.
+      operationId: getPrice
+      parameters:
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: date
+          in: query
+          description: date of the price inquiry
+          required: true
+          schema:
+            type: string
+            example: "2020-12-31T23:59:59Z"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Price:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 35455
+        brandId:
+          type: integer
+          format: int64
+          example: 1
+        priceList:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          example: 35.50
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: "Product with id 35455 not found"

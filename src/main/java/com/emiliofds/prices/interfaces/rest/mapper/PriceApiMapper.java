@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PriceApiMapper {
     public Price map(PriceResponse priceResponse) {
-        return null;
+        Price price = new Price();
+
+        price.setProductId(priceResponse.getProductId());
+        price.setBrandId(priceResponse.getBrandId());
+        price.setPriceList(priceResponse.getPriceListId());
+        price.setPrice(priceResponse.getPriceValue());
+
+        return price;
     }
 }

@@ -45,7 +45,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PriceNotFoundError'
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Price:
@@ -66,9 +72,12 @@ components:
         price:
           type: number
           example: 35.50
-    PriceNotFoundError:
+    Error:
       type: object
       properties:
+        code:
+          type: integer
+          example: 404
         message:
           type: string
           example: "Product with id 35455 not found"

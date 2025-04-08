@@ -15,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
+import static com.emiliofds.prices.interfaces.rest.util.PriceApiFactory.buildPrice;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,29 +37,22 @@ public class PriceControllerTest {
         // Arrange
         Long productId = 1L;
         Long brandId = 2L;
-        LocalDateTime date = LocalDateTime.now();
-        Long priceList = 3L;
-        BigDecimal priceValue = BigDecimal.valueOf(24.99);
-        PriceResponse mockResponse = new PriceResponse();
-        Price expectedPrice = buildPrice(productId, brandId, priceList, priceValue);
+        String stringDate = "2021-06-14T10:00:00Z";
+        LocalDateTime date = OffsetDateTime.parse(stringDate).toLocalDateTime();
+        Long priceListId = 3L;
+        BigDecimal priceValue = BigDecimal.valueOf(4525.56f);
+        PriceResponse mockResponse = new PriceResponse(productId, brandId, priceListId, priceValue);
+        Price mockApiPrice = buildPrice(productId, brandId, priceListId, priceValue);
+        Price expectedPrice = buildPrice(productId, brandId, priceListId, priceValue);
 
         // Act
         when(priceSearcher.search(productId, brandId, date)).thenReturn(mockResponse);
-        when(priceApiMapper.map(mockResponse)).thenReturn(expectedPrice);
-        var result = priceController.getPrice(productId, brandId, date.toString());
+        when(priceApiMapper.map(mockResponse)).thenReturn(mockApiPrice);
+        var result = priceController.getPrice(productId, brandId, stringDate);
 
         // Assert
         Assertions.assertEquals(ResponseEntity.ok().body(expectedPrice), result);
     }
 
-    private Price buildPrice(Long productId, Long brandId, Long priceList, BigDecimal priceValue) {
-        Price price = new Price();
 
-        price.setProductId(productId);
-        price.setBrandId(brandId);
-        price.setPriceList(priceList);
-        price.setPrice(priceValue);
-
-        return price;
-    }
 }

@@ -11,3 +11,6 @@ CREATE TABLE PRICE (
     price DECIMAL(10, 2),
     curr VARCHAR(3)
 );
+
+CREATE INDEX idx_price_effective
+ON PRICE(product_id, brand_id, priority DESC, start_date, end_date);

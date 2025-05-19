@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title:  Prices API Specification
+  title: Prices API Specification
   description: An API that allows to search product prices.
   version: 1.0.0
 tags:
